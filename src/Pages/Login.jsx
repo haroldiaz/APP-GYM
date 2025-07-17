@@ -9,15 +9,14 @@ export default  function Login() {
     const navigate = useNavigate();
 
     const handleMenuPrincipal = () => {
-			 navigate("/");
-
+			 navigate("/menu");
     }
     return (
         <div>
             <div className="container-form-login">
                 <form action="">
                     <h1>Login</h1>
-                     <TextField
+                    <TextField
                     label="Nombre"
                     variant="outlined"
                     fullWidth
