@@ -5,7 +5,9 @@ import '../Styles/usuarios.css'
 export default function GestionUsuarios(){
     const [nombre,setNombre] = useState("");
     const [cedula,setCedula] = useState("");
+    const [correo,setCorreo] = useState("");
 
+    
     const mostrarNombre = () => {
         console.log(nombre);
     }
@@ -26,10 +28,14 @@ export default function GestionUsuarios(){
                     <TextField 
                         label="Cedula"
                         variant="outlined"
+                        value={cedula}
+                        onChange={(e) => setCedula(e.target.value)}
                         />
                     <TextField 
                         label="Correo"
                         variant="outlined"
+                        value={correo}
+                        onChange={(e) => setCorreo(e.target.value)}
                         />
                     <TextField 
                         label="Telefono"
