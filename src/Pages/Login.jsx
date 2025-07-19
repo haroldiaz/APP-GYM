@@ -19,12 +19,12 @@ export default  function Login() {
                     <TextField
                     label="Nombre"
                     variant="outlined"
-                    fullWidth
+                    
                     />
                     <TextField
                     label="Contrasenia"
                     variant="outlined"
-                    fullWidth
+                    
                     />
                     <Button 
                     variant="contained" 
