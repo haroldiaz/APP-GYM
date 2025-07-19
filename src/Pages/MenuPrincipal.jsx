@@ -10,10 +10,16 @@ export default function MenuPrincipal(){
     const handleNavegar = () => {
         navigate("/RegistrarUsuarios");
     };
+    const handleNavegarUsuarios = () => {
+        navigate("/VerUsuarios");
+    };
     return (
         <div>
-            <Navbar></Navbar>
+            <Navbar/>
             <div>
+              <div className="card-pages" onClick={handleNavegarUsuarios} >
+                 <h3>Ver Usuarios</h3>
+              </div>
               <div className="card-pages" onClick={handleNavegar} >
                  <h3>Registro Usuarios</h3>
               </div>
