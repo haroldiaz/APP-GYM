@@ -13,6 +13,9 @@ export default function MenuPrincipal(){
     const handleNavegarUsuarios = () => {
         navigate("/VerUsuarios");
     };
+     const handleNavegarHistorial = () => {
+        navigate("/Historial");
+    };
     return (
         <div>
             <Navbar/>
@@ -23,6 +26,10 @@ export default function MenuPrincipal(){
               <div className="card-pages" onClick={handleNavegar} >
                  <h3>Registro Usuarios</h3>
               </div>
+              <div className="card-pages" onClick={handleNavegarHistorial} >
+                 <h3>Historial Asistencia</h3>
+              </div>
+             
             </div>
         </div>
     );
