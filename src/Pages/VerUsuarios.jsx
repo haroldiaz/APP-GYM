@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Banner from "../Components/Banner";
 import {
   Table,
@@ -23,16 +23,27 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import "../Styles/VerUsuarios/tablaUsuarios.css";
 
 export default function VerUsuarios() {
-  const [usuarios, setUsuarios] = useState([
-    { id: 1, nombre: "Juan", edad: 25 },
-    { id: 2, nombre: "María", edad: 30 },
-    { id: 3, nombre: "Carlos", edad: 28 },
-    { id: 4, nombre: "Lucía", edad: 22 },
-    { id: 5, nombre: "Pedro", edad: 35 },
-  ]);
-
+  const [usuarios, setUsuarios] = useState([]);
   const [openEditar, setOpenEditar] = useState(false);
   const [usuarioEditando, setUsuarioEditando] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/usuarios")
+      .then((response) => response.json())
+      .then((data) => {
+        const listaUsuarios = data.map((u, index) => ({
+          id: index + 1,
+          nombre: u.nombre,
+          cedula: u.cedula,
+          correo: u.correo,
+          telefono: u.telefono,
+        }));
+        setUsuarios(listaUsuarios);
+      })
+      .catch((error) => {
+        console.error("Error al cargar usuarios:", error);
+      });
+  }, []);
 
   const handleEditar = (usuario) => {
     setUsuarioEditando(usuario);
@@ -70,7 +81,9 @@ export default function VerUsuarios() {
               <TableRow>
                 <TableCell><strong>ID</strong></TableCell>
                 <TableCell><strong>Nombre</strong></TableCell>
-                <TableCell><strong>Edad</strong></TableCell>
+                <TableCell><strong>Cédula</strong></TableCell>
+                <TableCell><strong>Correo</strong></TableCell>
+                <TableCell><strong>Teléfono</strong></TableCell>
                 <TableCell><strong>Acciones</strong></TableCell>
               </TableRow>
             </TableHead>
@@ -79,7 +92,9 @@ export default function VerUsuarios() {
                 <TableRow key={usuario.id}>
                   <TableCell>{usuario.id}</TableCell>
                   <TableCell>{usuario.nombre}</TableCell>
-                  <TableCell>{usuario.edad}</TableCell>
+                  <TableCell>{usuario.cedula}</TableCell>
+                  <TableCell>{usuario.correo}</TableCell>
+                  <TableCell>{usuario.telefono}</TableCell>
                   <TableCell>
                     <Tooltip title="Editar">
                       <IconButton
@@ -102,7 +117,7 @@ export default function VerUsuarios() {
               ))}
               {usuarios.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={4} align="center">
+                  <TableCell colSpan={6} align="center">
                     No hay usuarios disponibles.
                   </TableCell>
                 </TableRow>
@@ -127,12 +142,20 @@ export default function VerUsuarios() {
           />
           <TextField
             margin="dense"
-            label="Edad"
-            type="number"
+            label="Correo"
             fullWidth
-            value={usuarioEditando?.edad || ""}
+            value={usuarioEditando?.correo || ""}
             onChange={(e) =>
-              setUsuarioEditando({ ...usuarioEditando, edad: parseInt(e.target.value) })
+              setUsuarioEditando({ ...usuarioEditando, correo: e.target.value })
+            }
+          />
+          <TextField
+            margin="dense"
+            label="Teléfono"
+            fullWidth
+            value={usuarioEditando?.telefono || ""}
+            onChange={(e) =>
+              setUsuarioEditando({ ...usuarioEditando, telefono: e.target.value })
             }
           />
         </DialogContent>
