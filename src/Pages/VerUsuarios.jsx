@@ -192,15 +192,6 @@ export default function VerUsuarios() {
           />
            <TextField
             margin="dense"
-            label="Teléfono"
-            fullWidth
-            value={usuarioEditando?.telefono || ""}
-            onChange={(e) =>
-              setUsuarioEditando({ ...usuarioEditando, telefono: e.target.value })
-            }
-          />
-          <TextField
-            margin="dense"
             label="Correo"
             fullWidth
             value={usuarioEditando?.correo || ""}
@@ -208,6 +199,16 @@ export default function VerUsuarios() {
               setUsuarioEditando({ ...usuarioEditando, correo: e.target.value })
             }
           />
+           <TextField
+            margin="dense"
+            label="Teléfono"
+            fullWidth
+            value={usuarioEditando?.telefono || ""}
+            onChange={(e) =>
+              setUsuarioEditando({ ...usuarioEditando, telefono: e.target.value })
+            }
+          />
+         
          
         </DialogContent>
         <DialogActions>
