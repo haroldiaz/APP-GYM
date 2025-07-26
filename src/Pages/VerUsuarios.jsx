@@ -28,11 +28,15 @@ export default function VerUsuarios() {
   const [usuarioEditando, setUsuarioEditando] = useState(null);
 
   useEffect(() => {
+    fetchUsuarios();
+  }, []);
+
+  const fetchUsuarios = () => {
     fetch("http://localhost:3001/api/usuarios")
       .then((response) => response.json())
       .then((data) => {
-        const listaUsuarios = data.map((u, index) => ({
-          id: index + 1,
+        const listaUsuarios = data.map((u) => ({
+          id: u.id,
           nombre: u.nombre,
           cedula: u.cedula,
           correo: u.correo,
@@ -43,7 +47,7 @@ export default function VerUsuarios() {
       .catch((error) => {
         console.error("Error al cargar usuarios:", error);
       });
-  }, []);
+  };
 
   const handleEditar = (usuario) => {
     setUsuarioEditando(usuario);
@@ -56,18 +60,55 @@ export default function VerUsuarios() {
   };
 
   const handleGuardarCambios = () => {
-    setUsuarios((prevUsuarios) =>
-      prevUsuarios.map((u) =>
-        u.id === usuarioEditando.id ? usuarioEditando : u
-      )
-    );
-    handleCerrarDialogo();
+    fetch(`http://localhost:3001/api/usuarios/${usuarioEditando.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombre: usuarioEditando.nombre,
+        cedula:usuarioEditando.cedula,
+        correo: usuarioEditando.correo,
+        telefono: usuarioEditando.telefono,
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Error al actualizar usuario");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        // Reemplaza usuario actualizado en el estado
+        setUsuarios((prevUsuarios) =>
+          prevUsuarios.map((u) =>
+            u.id === data.usuario.id ? data.usuario : u
+          )
+        );
+        handleCerrarDialogo();
+      })
+      .catch((error) => {
+        console.error("Error al actualizar:", error);
+        alert("Error al actualizar el usuario.");
+      });
   };
 
   const handleEliminar = (id) => {
     const confirmacion = window.confirm("¿Estás seguro de que quieres eliminar este usuario?");
     if (confirmacion) {
-      setUsuarios((prev) => prev.filter((u) => u.id !== id));
+      fetch(`http://localhost:3001/api/usuarios/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Error al eliminar el usuario");
+          }
+          setUsuarios((prev) => prev.filter((u) => u.id !== id));
+        })
+        .catch((error) => {
+          console.error("Error al eliminar usuario:", error);
+          alert("Hubo un error al eliminar el usuario.");
+        });
     }
   };
 
@@ -142,14 +183,14 @@ export default function VerUsuarios() {
           />
           <TextField
             margin="dense"
-            label="Correo"
+            label="Cedula"
             fullWidth
-            value={usuarioEditando?.correo || ""}
+            value={usuarioEditando?.cedula || ""}
             onChange={(e) =>
-              setUsuarioEditando({ ...usuarioEditando, correo: e.target.value })
+              setUsuarioEditando({ ...usuarioEditando, cedula: e.target.value })
             }
           />
-          <TextField
+           <TextField
             margin="dense"
             label="Teléfono"
             fullWidth
@@ -158,6 +199,16 @@ export default function VerUsuarios() {
               setUsuarioEditando({ ...usuarioEditando, telefono: e.target.value })
             }
           />
+          <TextField
+            margin="dense"
+            label="Correo"
+            fullWidth
+            value={usuarioEditando?.correo || ""}
+            onChange={(e) =>
+              setUsuarioEditando({ ...usuarioEditando, correo: e.target.value })
+            }
+          />
+         
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCerrarDialogo} color="inherit">
