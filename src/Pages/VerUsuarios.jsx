@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Banner from "../Components/Banner";
+
 import ModalEdicion from "../Components/ModalEdicion";
 import TabalUsuarios from "../Components/TablaUsuarios";
 import Navbar from "../Components/NavBar";
