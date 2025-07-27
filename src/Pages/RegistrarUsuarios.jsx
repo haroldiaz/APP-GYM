@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import '../Styles/usuarios.css';
+import '../Styles/RegistrarUsuarios/usuarios.css';
 import axios from 'axios';
+import Navbar from "../Components/NavBar";
 
 export default function GestionUsuarios() {
   const [nombre, setNombre] = useState("");
@@ -10,11 +11,35 @@ export default function GestionUsuarios() {
   const [telefono, setTelefono] = useState("");
   const [cargando, setCargando] = useState(false);
 
+  const validarFormulario = () => {
+    if (!nombre || !cedula || !correo || !telefono) {
+      alert("⚠️ Todos los campos son obligatorios.");
+      return false;
+    }
+
+    if (!/^\d+$/.test(cedula)) {
+      alert("❌ La cédula debe contener solo números.");
+      return false;
+    }
+
+    if (!/^\d{7,10}$/.test(telefono)) {
+      alert("❌ El teléfono debe contener solo números (7 a 10 dígitos).");
+      return false;
+    }
+
+    if (!/^\S+@\S+\.\S+$/.test(correo)) {
+      alert("❌ El correo no es válido.");
+      return false;
+    }
+
+    return true;
+  };
+
   const crearUsuario = async () => {
-    console.log("Enviando usuario:", { nombre, cedula, correo, telefono });
+    if (!validarFormulario()) return;
+
     setCargando(true);
     try {
-        
       const response = await axios.post("http://localhost:3001/api/usuarios", {
         nombre,
         cedula,
@@ -24,7 +49,6 @@ export default function GestionUsuarios() {
 
       if (response.status === 201) {
         alert("✅ Usuario registrado correctamente");
-        console.log(response.data);
 
         // Limpiar los campos
         setNombre("");
@@ -44,9 +68,7 @@ export default function GestionUsuarios() {
 
   return (
     <div>
-      <div className="banner">
-        <h2>Registrar Usuario</h2>
-      </div>
+      <Navbar />
       <div>
         <form className="form-usuarios" onSubmit={(e) => e.preventDefault()}>
           <TextField

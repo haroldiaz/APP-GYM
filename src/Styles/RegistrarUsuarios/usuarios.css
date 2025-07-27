@@ -13,8 +13,8 @@
 .form-usuarios{
     width: 100%;
     max-width: 400px;
-    margin: 60px auto;
-    padding: 30px 20px;
+    margin: 20px auto;
+    padding: 20px 20px;
     border-radius: 12px;
     border: 1px solid #ccc;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -22,5 +22,5 @@
     flex-direction: column;
     justify-content: center;
     background-color: #fff;
-    gap: 16px;
+    gap: 8px;
 }
