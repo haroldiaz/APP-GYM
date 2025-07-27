@@ -64,9 +64,9 @@ export default function Navbar({ title = "APP GYM" }) {
         >
           <List>
             <ListItem disablePadding>
-              <ListItemButton onClick={() => handleNav('/')}>
+              <ListItemButton onClick={() => handleNav('/menu')}>
                 <ListItemIcon><HomeIcon /></ListItemIcon>
-                <ListItemText primary="Inicio" />
+                <ListItemText primary="Menu" />
               </ListItemButton>
             </ListItem>
 

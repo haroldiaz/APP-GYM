@@ -3,12 +3,15 @@ import Banner from "../Components/Banner";
 import ModalEdicion from "../Components/ModalEdicion";
 import TabalUsuarios from "../Components/TablaUsuarios";
 import Navbar from "../Components/NavBar";
+import { Button, Typography, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function VerUsuarios() {
-
   const [usuarios, setUsuarios] = useState([]);
   const [openEditar, setOpenEditar] = useState(false);
   const [usuarioEditando, setUsuarioEditando] = useState(null);
+  const [errorCarga, setErrorCarga] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUsuarios();
@@ -16,7 +19,12 @@ export default function VerUsuarios() {
 
   const fetchUsuarios = () => {
     fetch("http://localhost:3001/api/usuarios")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al conectar con la API");
+        }
+        return response.json();
+      })
       .then((data) => {
         const listaUsuarios = data.map((u) => ({
           id: u.id,
@@ -26,9 +34,11 @@ export default function VerUsuarios() {
           telefono: u.telefono,
         }));
         setUsuarios(listaUsuarios);
+        setErrorCarga(listaUsuarios.length === 0); // true si no hay usuarios
       })
       .catch((error) => {
         console.error("Error al cargar usuarios:", error);
+        setErrorCarga(true);
       });
   };
 
@@ -50,7 +60,7 @@ export default function VerUsuarios() {
       },
       body: JSON.stringify({
         nombre: usuarioEditando.nombre,
-        cedula:usuarioEditando.cedula,
+        cedula: usuarioEditando.cedula,
         correo: usuarioEditando.correo,
         telefono: usuarioEditando.telefono,
       }),
@@ -62,11 +72,8 @@ export default function VerUsuarios() {
         return res.json();
       })
       .then((data) => {
-        // Reemplaza usuario actualizado en el estado
         setUsuarios((prevUsuarios) =>
-          prevUsuarios.map((u) =>
-            u.id === data.usuario.id ? data.usuario : u
-          )
+          prevUsuarios.map((u) => (u.id === data.usuario.id ? data.usuario : u))
         );
         handleCerrarDialogo();
       })
@@ -97,20 +104,37 @@ export default function VerUsuarios() {
 
   return (
     <div>
-      <Navbar title="Usuarios"></Navbar>
-      <TabalUsuarios
-        usuarios={usuarios}
-        handleEditar={handleEditar}
-        handleEliminar={handleEliminar}
-      />
+      <Navbar title="Usuarios" />
+      {errorCarga ? (
+        <Box sx={{ p: 4, textAlign: "center" }}>
+          <Typography variant="h6" gutterBottom>
+            No se encontraron usuarios o no se pudo conectar con el servidor.
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/RegistrarUsuarios")}
+          >
+            Agregar Usuario Nuevo
+          </Button>
+        </Box>
+      ) : (
+        <>
+          <TabalUsuarios
+            usuarios={usuarios}
+            handleEditar={handleEditar}
+            handleEliminar={handleEliminar}
+          />
 
-      <ModalEdicion 
-        opendEditar={openEditar}
-        usuarioEditando={usuarioEditando}
-        setUsuarioEditando={setUsuarioEditando}
-        handleCerrarDialogo={handleCerrarDialogo}
-        handleGuardarCambios={handleGuardarCambios}
-        />
+          <ModalEdicion
+            opendEditar={openEditar}
+            usuarioEditando={usuarioEditando}
+            setUsuarioEditando={setUsuarioEditando}
+            handleCerrarDialogo={handleCerrarDialogo}
+            handleGuardarCambios={handleGuardarCambios}
+          />
+        </>
+      )}
     </div>
   );
 }

@@ -68,7 +68,7 @@ export default function GestionUsuarios() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar title="Registro Usuarios"/>
       <div>
         <form className="form-usuarios" onSubmit={(e) => e.preventDefault()}>
           <TextField
