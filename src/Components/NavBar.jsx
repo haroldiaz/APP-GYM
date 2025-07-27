@@ -71,16 +71,16 @@ export default function Navbar({ title = "APP GYM" }) {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton onClick={() => handleNav('/AgendarCita')}>
+              <ListItemButton onClick={() => handleNav('/VerUsuarios')}>
                 <ListItemIcon><EventNoteIcon /></ListItemIcon>
-                <ListItemText primary="Citas" />
+                <ListItemText primary="Ver Usuarios" />
               </ListItemButton>
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton onClick={() => handleNav('/registro')}>
+              <ListItemButton onClick={() => handleNav('/RegistrarUsuarios')}>
                 <ListItemIcon><AddCircleOutlineIcon /></ListItemIcon>
-                <ListItemText primary="Registro Cita" />
+                <ListItemText primary="Registro Usuario" />
               </ListItemButton>
             </ListItem>
 

@@ -96,7 +96,7 @@ export default function VerUsuarios() {
 
   return (
     <div>
-      <Banner texto={"Tabla Usuarios"} />
+      <Banner texto={"Usuarios"} />
       
       <TabalUsuarios
         usuarios={usuarios}
