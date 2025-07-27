@@ -25,23 +25,37 @@ import "../Styles/VerUsuarios/tablaUsuarios.css";
 export default function TabalUsuarios({ usuarios, handleEditar, handleEliminar }) {
   const [filtro, setFiltro] = useState("");
   const [campoFiltro, setCampoFiltro] = useState("nombre");
+  const [paginaActual, setPaginaActual] = useState(1);
+  const porPagina = 5;
 
+  // Filtrado
   const usuariosFiltrados = usuarios.filter((usuario) => {
     if (!filtro) return true;
     const valorCampo = usuario[campoFiltro]?.toLowerCase() || "";
-    return valorCampo === filtro.toLowerCase(); // Coincidencia exacta
+    return valorCampo === filtro.toLowerCase(); // puedes cambiar a includes() si quieres coincidencias parciales
   });
+
+  // Paginación
+  const totalPaginas = Math.ceil(usuariosFiltrados.length / porPagina);
+  const inicio = (paginaActual - 1) * porPagina;
+  const usuariosPaginados = usuariosFiltrados.slice(inicio, inicio + porPagina);
 
   const handleBorrarFiltro = () => {
     setFiltro("");
+    setPaginaActual(1);
+  };
+
+  const cambiarPagina = (nuevaPagina) => {
+    if (nuevaPagina >= 1 && nuevaPagina <= totalPaginas) {
+      setPaginaActual(nuevaPagina);
+    }
   };
 
   return (
     <div className="tablaUsuarios">
-      {/* Filtro separado en Paper */}
+      {/* Filtro */}
       <Paper elevation={2} style={{ padding: "16px", marginBottom: "16px" }}>
         <Grid container spacing={2} alignItems="center">
-          {/* Campo select */}
           <Grid item xs={12} sm={3} md={2}>
             <FormControl fullWidth size="small">
               <InputLabel id="select-campo-label">Buscar por</InputLabel>
@@ -58,20 +72,19 @@ export default function TabalUsuarios({ usuarios, handleEditar, handleEliminar }
               </Select>
             </FormControl>
           </Grid>
-
-          {/* Campo de texto */}
           <Grid item xs={12} sm={6} md={7}>
             <TextField
               label={`Buscar ${campoFiltro}`}
               variant="outlined"
               size="small"
               value={filtro}
-              onChange={(e) => setFiltro(e.target.value)}
+              onChange={(e) => {
+                setFiltro(e.target.value);
+                setPaginaActual(1); // reset pag
+              }}
               fullWidth
             />
           </Grid>
-
-          {/* Botón de borrar */}
           <Grid item xs={12} sm={3} md={3}>
             <Button
               variant="outlined"
@@ -99,7 +112,7 @@ export default function TabalUsuarios({ usuarios, handleEditar, handleEliminar }
             </TableRow>
           </TableHead>
           <TableBody>
-            {usuariosFiltrados.map((usuario) => (
+            {usuariosPaginados.map((usuario) => (
               <TableRow key={usuario.id}>
                 <TableCell>{usuario.id}</TableCell>
                 <TableCell>{usuario.nombre}</TableCell>
@@ -126,7 +139,7 @@ export default function TabalUsuarios({ usuarios, handleEditar, handleEliminar }
                 </TableCell>
               </TableRow>
             ))}
-            {usuariosFiltrados.length === 0 && (
+            {usuariosPaginados.length === 0 && (
               <TableRow>
                 <TableCell colSpan={6} align="center">
                   No se encontró ningún usuario con ese {campoFiltro}.
@@ -136,6 +149,27 @@ export default function TabalUsuarios({ usuarios, handleEditar, handleEliminar }
           </TableBody>
         </Table>
       </TableContainer>
+
+      {/* Controles de paginación */}
+      {totalPaginas > 1 && (
+        <Paper elevation={2} style={{ padding: "16px", marginTop: "16px", display: "flex", justifyContent: "center", gap: "16px", alignItems: "center" }}>
+          <Button
+            variant="contained"
+            disabled={paginaActual === 1}
+            onClick={() => cambiarPagina(paginaActual - 1)}
+          >
+            Anterior
+          </Button>
+          <span>Página {paginaActual} de {totalPaginas}</span>
+          <Button
+            variant="contained"
+            disabled={paginaActual === totalPaginas}
+            onClick={() => cambiarPagina(paginaActual + 1)}
+          >
+            Siguiente
+          </Button>
+        </Paper>
+      )}
     </div>
   );
 }

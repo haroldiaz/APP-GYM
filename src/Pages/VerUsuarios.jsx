@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Banner from "../Components/Banner";
 import ModalEdicion from "../Components/ModalEdicion";
 import TabalUsuarios from "../Components/TablaUsuarios";
+import Navbar from "../Components/NavBar";
 
 export default function VerUsuarios() {
 
@@ -96,8 +97,7 @@ export default function VerUsuarios() {
 
   return (
     <div>
-      <Banner texto={"Usuarios"} />
-      
+      <Navbar title="Usuarios"></Navbar>
       <TabalUsuarios
         usuarios={usuarios}
         handleEditar={handleEditar}

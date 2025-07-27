@@ -1,9 +1,12 @@
 import React from "react";
 import '../Styles/usuarios.css'
+import Navbar from "./NavBar";
 export default function Banner ({texto})  {
     return(
-        <div className="banner">
-                {texto}
-        </div>
+        <>
+            <Navbar></Navbar>
+            
+        </>
+        
     );
 };
