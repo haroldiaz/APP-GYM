@@ -14,7 +14,10 @@ export default  function Login() {
     return (
         <div>
             <div className="container-form-login">
-                <form action="">
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    handleMenuPrincipal();
+                    }}>
                     <h1>Login</h1>
                     <TextField
                     label="Nombre"
@@ -28,8 +31,7 @@ export default  function Login() {
                     />
                     <Button 
                     variant="contained" 
-                    type="submit"
-                    onClick={handleMenuPrincipal}>
+                    type="submit">
                         Iniciar Sesion
                     </Button>
                 </form>
