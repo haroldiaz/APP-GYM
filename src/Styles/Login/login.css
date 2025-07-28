@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #e0eafc, #cfdef3); /* fondo suave con gradiente */
+  background: linear-gradient(135deg, #ffffff, #cfdef3); /* fondo suave con gradiente */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .container-form-login label {
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 0.3rem;
   color: #444;
 }
@@ -64,5 +64,5 @@
 }
 
 .container-form-login button:hover {
-  background-color: #3b7dd8;
+  background-color: #7a7a7a;
 }
