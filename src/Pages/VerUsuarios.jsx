@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import ModalEdicion from "../Components/ModalEdicion";
-import TabalUsuarios from "../Components/TablaUsuarios";
+import ModalEdicion from "../Components/Usuarios/ModalEdicion";
+import TablaUsuarios from "../Components/Usuarios/TablaUsuarios";
 import Navbar from "../Components/NavBar";
 import { Button, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -120,7 +120,7 @@ export default function VerUsuarios() {
         </Box>
       ) : (
         <>
-          <TabalUsuarios
+          <TablaUsuarios
             usuarios={usuarios}
             handleEditar={handleEditar}
             handleEliminar={handleEliminar}

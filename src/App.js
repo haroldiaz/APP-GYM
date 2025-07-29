@@ -6,6 +6,8 @@ import MenuPrincipal from './Pages/MenuPrincipal.jsx';
 import RegistrarUsuarios from './Pages/RegistrarUsuarios.jsx';
 import VerUsuarios from './Pages/VerUsuarios.jsx';
 import HistorialAsistencias from './Pages/HistorialAsistencias.jsx';
+import VerEntrenadores from './Pages/VerEntrenadores.jsx';
+import RegistrarEntrenador from './Pages/RegistrarEntrenador.jsx';
 function App() {
   return (
    <div className="App">
@@ -16,6 +18,8 @@ function App() {
       <Route path="/RegistrarUsuarios" element={<RegistrarUsuarios />} />
       <Route path="/VerUsuarios" element={<VerUsuarios />} />
       <Route path="/Historial" element={<HistorialAsistencias />} />
+      <Route path="/VerEntrenadores" element={<VerEntrenadores />} />
+      <Route path="/RegistrarEntrenador" element={<RegistrarEntrenador />} />
     </Routes>
   </Router>
   </div>

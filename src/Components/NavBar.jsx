@@ -83,7 +83,18 @@ export default function Navbar({ title = "APP GYM" }) {
                 <ListItemText primary="Registro Usuario" />
               </ListItemButton>
             </ListItem>
-
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => handleNav('/VerEntrenadores')}>
+                <ListItemIcon><PictureAsPdfIcon /></ListItemIcon>
+                <ListItemText primary="VerEntrenadores" />
+              </ListItemButton>
+            </ListItem>
+             <ListItem disablePadding>
+              <ListItemButton onClick={() => handleNav('/RegistrarEntrenador')}>
+                <ListItemIcon><PictureAsPdfIcon /></ListItemIcon>
+                <ListItemText primary="Registrar Entrenadores" />
+              </ListItemButton>
+            </ListItem>
             <ListItem disablePadding>
               <ListItemButton onClick={() => handleNav('/Exportar')}>
                 <ListItemIcon><PictureAsPdfIcon /></ListItemIcon>

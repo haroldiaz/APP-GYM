@@ -20,9 +20,9 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import "../Styles/VerUsuarios/tablaUsuarios.css";
+import "../../Styles/VerUsuarios/tablaUsuarios.css";
 
-export default function TabalUsuarios({ usuarios, handleEditar, handleEliminar }) {
+export default function TablaUsuarios({ usuarios, handleEditar, handleEliminar }) {
   const [filtro, setFiltro] = useState("");
   const [campoFiltro, setCampoFiltro] = useState("nombre");
   const [paginaActual, setPaginaActual] = useState(1);
