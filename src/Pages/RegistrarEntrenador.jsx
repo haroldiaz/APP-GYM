@@ -103,6 +103,22 @@ export default function RegistrarEntrenadores() {
             value={telefono}
             onChange={(e) => setTelefono(e.target.value)}
           />
+          <TextField
+            label="Especialidad"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={telefono}
+            onChange={(e) => setTelefono(e.target.value)}
+          />
+           <TextField
+            label="Experiencia"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={telefono}
+            onChange={(e) => setTelefono(e.target.value)}
+          />
           <Button
             variant="contained"
             color="primary"
@@ -110,7 +126,7 @@ export default function RegistrarEntrenadores() {
             disabled={cargando}
             style={{ marginTop: "16px" }}
           >
-            {cargando ? "Registrando..." : "Registrar Usuario"}
+            {cargando ? "Registrando..." : "Registrar Entrenador"}
           </Button>
         </form>
       </div>

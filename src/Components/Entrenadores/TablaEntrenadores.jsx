@@ -29,16 +29,16 @@ export default function TablaEntrenadores({ entrenadores, handleEditar, handleEl
   const porPagina = 5;
 
   // Filtrado
-  const usuariosFiltrados = entrenadores.filter((entrenador) => {
+  const entrenadoresFiltrados = entrenadores.filter((entrenador) => {
     if (!filtro) return true;
     const valorCampo = entrenadores[campoFiltro]?.toLowerCase() || "";
     return valorCampo === filtro.toLowerCase(); // puedes cambiar a includes() si quieres coincidencias parciales
   });
 
   // Paginación
-  const totalPaginas = Math.ceil(usuariosFiltrados.length / porPagina);
+  const totalPaginas = Math.ceil(entrenadoresFiltrados.length / porPagina);
   const inicio = (paginaActual - 1) * porPagina;
-  const usuariosPaginados = usuariosFiltrados.slice(inicio, inicio + porPagina);
+  const usuariosPaginados = entrenadoresFiltrados.slice(inicio, inicio + porPagina);
 
   const handleBorrarFiltro = () => {
     setFiltro("");
@@ -142,7 +142,7 @@ export default function TablaEntrenadores({ entrenadores, handleEditar, handleEl
             {usuariosPaginados.length === 0 && (
               <TableRow>
                 <TableCell colSpan={6} align="center">
-                  No se encontró ningún usuario con ese {campoFiltro}.
+                  No se encontró ningún Entrenador con ese {campoFiltro}.
                 </TableCell>
               </TableRow>
             )}
