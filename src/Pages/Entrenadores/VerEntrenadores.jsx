@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../Components/NavBar';
-import TablaEntrenadores from '../Components/Entrenadores/TablaEntrenadores';
-import ModalEdicionEntrenadores from '../Components/Entrenadores/ModalEdicionEntrenadores';
+import Navbar from '../../Components/NavBar';
+import TablaEntrenadores from '../../Components/Entrenadores/TablaEntrenadores';
+import ModalEdicionEntrenadores from '../../Components/Entrenadores/ModalEdicionEntrenadores';
 import { useNavigate } from "react-router-dom";
 
 function VerEntrenadores() {

@@ -3,11 +3,14 @@ import './Styles/App.css';
 import Login from './Pages/Login.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MenuPrincipal from './Pages/MenuPrincipal.jsx';
-import RegistrarUsuarios from './Pages/RegistrarUsuarios.jsx';
+
 import VerUsuarios from './Pages/VerUsuarios.jsx';
+import RegistrarUsuarios from './Pages/RegistrarUsuarios.jsx';
+
 import HistorialAsistencias from './Pages/HistorialAsistencias.jsx';
-import VerEntrenadores from './Pages/VerEntrenadores.jsx';
-import RegistrarEntrenador from './Pages/RegistrarEntrenador.jsx';
+
+import VerEntrenadores from './Pages/Entrenadores/VerEntrenadores.jsx';
+import RegistrarEntrenador from './Pages/Entrenadores/RegistrarEntrenador.jsx';
 function App() {
   return (
    <div className="App">

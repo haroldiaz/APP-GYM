@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import '../Styles/RegistrarUsuarios/usuarios.css';
+import '../../Styles/RegistrarUsuarios/usuarios.css';
 import axios from 'axios';
-import Navbar from "../Components/NavBar";
+import Navbar from "../../Components/NavBar";
 
 export default function RegistrarEntrenadores() {
   const [nombre, setNombre] = useState("");
   const [cedula, setCedula] = useState("");
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState("");
+  const [especialidad, setEspecialidad] = useState("");
+  const [experiencia, setExperiencia] = useState("");
   const [cargando, setCargando] = useState(false);
 
   const validarFormulario = () => {
-    if (!nombre || !cedula || !correo || !telefono) {
+    if (!nombre || !cedula || !correo || !telefono || !especialidad || !experiencia) {
       alert("⚠️ Todos los campos son obligatorios.");
       return false;
     }
@@ -35,32 +37,39 @@ export default function RegistrarEntrenadores() {
     return true;
   };
 
-  const crearUsuario = async () => {
+  const crearEntrenador = async () => {
     if (!validarFormulario()) return;
 
     setCargando(true);
     try {
-      const response = await axios.post("http://localhost:3001/api/usuarios", {
+      const fechaActual = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
+
+      const response = await axios.post("http://localhost:3001/api/entrenadores", {
         nombre,
         cedula,
         correo,
-        telefono
+        telefono,
+        especialidad,
+        experiencia,
+        fecha_ingreso: fechaActual
       });
 
       if (response.status === 201) {
-        alert("✅ Usuario registrado correctamente");
+        alert("✅ Entrenador registrado correctamente");
 
         // Limpiar los campos
         setNombre("");
         setCedula("");
         setCorreo("");
         setTelefono("");
+        setEspecialidad("");
+        setExperiencia("");
       } else {
-        alert("⚠️ No se pudo registrar el usuario");
+        alert("⚠️ No se pudo registrar el Entrenador");
       }
     } catch (error) {
-      console.error("❌ Error al crear el usuario:", error);
-      alert("❌ Ocurrió un error al registrar el usuario");
+      console.error("❌ Error al crear el Entrenador:", error);
+      alert("❌ Ocurrió un error al registrar el Entrenador.");
     } finally {
       setCargando(false);
     }
@@ -68,7 +77,7 @@ export default function RegistrarEntrenadores() {
 
   return (
     <div>
-      <Navbar title="Registro Entrenadores"/>
+      <Navbar title="Registro Entrenadores" />
       <div>
         <form className="form-usuarios" onSubmit={(e) => e.preventDefault()}>
           <TextField
@@ -108,21 +117,21 @@ export default function RegistrarEntrenadores() {
             variant="outlined"
             fullWidth
             margin="normal"
-            value={telefono}
-            onChange={(e) => setTelefono(e.target.value)}
+            value={especialidad}
+            onChange={(e) => setEspecialidad(e.target.value)}
           />
-           <TextField
+          <TextField
             label="Experiencia"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={telefono}
-            onChange={(e) => setTelefono(e.target.value)}
+            value={experiencia}
+            onChange={(e) => setExperiencia(e.target.value)}
           />
           <Button
             variant="contained"
             color="primary"
-            onClick={crearUsuario}
+            onClick={crearEntrenador}
             disabled={cargando}
             style={{ marginTop: "16px" }}
           >
