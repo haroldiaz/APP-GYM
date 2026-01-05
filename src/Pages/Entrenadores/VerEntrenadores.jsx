@@ -8,7 +8,7 @@ function VerEntrenadores() {
   const [entrenadores, setEntrenadores] = useState([]);
   const [openEditar, setOpenEditar] = useState(false);
   const [entrenadorEditando, setEntrenadoresEditando] = useState(null);
-  const [errorCarga, setErrorCarga] = useState(false);
+  const [ setErrorCarga] = useState(false);
 
   const navigate = useNavigate();
 
