@@ -5,13 +5,13 @@ import {
   Paper,
   Typography,
   Box,
-  Button,
   useTheme,
 } from "@mui/material";
 import GroupIcon from "@mui/icons-material/Group";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Navbar from "../Components/NavBar";
+import "../Styles/MenuPrincipal/MenuPrincipal.css";
 
 export default function MenuPrincipal() {
   const navigate = useNavigate();
@@ -21,101 +21,98 @@ export default function MenuPrincipal() {
     {
       label: "Usuarios Ingresados",
       value: 124,
-      icon: <GroupIcon color="primary" sx={{ fontSize: 40 }} />,
+      icon: <GroupIcon color="primary" sx={{ fontSize: 45 }} />,
     },
     {
       label: "Usuarios Activos",
       value: 28,
-      icon: <GroupAddIcon color="success" sx={{ fontSize: 40 }} />,
+      icon: <GroupAddIcon color="success" sx={{ fontSize: 45 }} />,
     },
     {
       label: "Total Asistencias",
       value: 512,
-      icon: <CheckCircleIcon color="secondary" sx={{ fontSize: 40 }} />,
+      icon: <CheckCircleIcon color="secondary" sx={{ fontSize: 45 }} />,
     },
   ];
 
   return (
-    <div>
+    <>
       <Navbar />
 
+      {/* CONTENEDOR PRINCIPAL */}
       <Box
         sx={{
-          minHeight: "calc(100vh - 64px)", // Ajusta según la altura del Navbar
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          bgcolor: theme.palette.background.default,
-          p: 2,
-        }}
+        minHeight: "calc(100vh - 64px)",
+        bgcolor: theme.palette.background.default,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",     // centra horizontal
+        justifyContent: "center", // centra vertical
+        p: 4,
+      }}
+
       >
-        <Paper
-          elevation={4}
+       
+
+        {/* ESTADÍSTICAS */}
+        <Grid container spacing={3} sx={{ mb: 3 }}>
+          {stats.map((stat, index) => (
+            <Grid item xs={12} sm={4} key={index}>
+              <Paper elevation={3} sx={{ p: 3, textAlign: "center" }}>
+                {stat.icon}
+                <Typography sx={{ mt: 1 }} color="text.secondary">
+                  {stat.label}
+                </Typography>
+                <Typography variant="h5" fontWeight="bold">
+                  {stat.value}
+                </Typography>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* 🔥 ZONA CENTRADA EN LA MITAD */}
+        <Box
           sx={{
-            width: "100%",
-            maxWidth: 800,
-            p: 8,
-            textAlign: "center",
+            flex: 1,
+            display: "column",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <Typography variant="h4" gutterBottom>
-            Dashboard de Administración
-          </Typography>
-
-          {/* Tarjetas estadísticas */}
-          <Grid container spacing={4} sx={{ mb: 4 }}>
-            {stats.map((stat, index) => (
-              <Grid item xs={12} sm={4} key={index}>
-                <Paper elevation={2} sx={{ p: 3 }}>
-                  {stat.icon}
-                  <Typography
-                    variant="body1"
-                    color="textSecondary"
-                    sx={{ mt: 1 }}
-                  >
-                    {stat.label}
-                  </Typography>
-                  <Typography variant="h5">{stat.value}</Typography>
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
-
-          {/* Botones de acción */}
-          <Grid container spacing={3}>
+          <Grid container spacing={4} justifyContent="center">
             <Grid item xs={12} sm={4}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
+              <div
+                className="card-pages"
                 onClick={() => navigate("/VerUsuarios")}
               >
-                Ver Usuarios
-              </Button>
+                <h1>Ver Usuarios</h1>
+                <p>Listado completo de usuarios registrados</p>
+              </div>
             </Grid>
+
             <Grid item xs={12} sm={4}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="success"
+              <div
+                className="card-pages"
                 onClick={() => navigate("/RegistrarUsuarios")}
               >
-                Registrar Usuario
-              </Button>
+                <h1>Registrar Usuario</h1>
+                <p>Agregar un nuevo usuario al sistema</p>
+              </div>
             </Grid>
+
             <Grid item xs={12} sm={4}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="secondary"
+              <div
+                className="card-pages"
                 onClick={() => navigate("/Historial")}
               >
-                Ver Historial
-              </Button>
+                <h1>Historial</h1>
+                <p>Ver asistencias y movimientos</p>
+              </div>
             </Grid>
           </Grid>
-        </Paper>
+        </Box>
       </Box>
-    </div>
+    </>
   );
 }
