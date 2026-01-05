@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, Paper } from "@mui/material";
+import { TextField, Button, Box, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import Navbar from "../../Components/NavBar";
 
-export default function RegistrarEntrenadores() {
+export default function RegistrarUsuarios() {
   const [nombre, setNombre] = useState("");
   const [cedula, setCedula] = useState("");
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [especialidad, setEspecialidad] = useState("");
-  const [experiencia, setExperiencia] = useState("");
   const [cargando, setCargando] = useState(false);
 
   const validarFormulario = () => {
-    if (!nombre || !cedula || !correo || !telefono || !especialidad || !experiencia) {
+    if (!nombre || !cedula || !correo || !telefono) {
       alert("⚠️ Todos los campos son obligatorios.");
       return false;
     }
@@ -36,38 +34,30 @@ export default function RegistrarEntrenadores() {
     return true;
   };
 
-  const crearEntrenador = async () => {
+  const crearUsuario = async () => {
     if (!validarFormulario()) return;
 
     setCargando(true);
     try {
-      const fechaActual = new Date().toISOString().split("T")[0];
-
-      const response = await axios.post("http://localhost:3001/api/entrenadores", {
+      const response = await axios.post("http://localhost:3001/api/usuarios", {
         nombre,
         cedula,
         correo,
         telefono,
-        especialidad,
-        experiencia,
-        fecha_ingreso: fechaActual,
       });
 
       if (response.status === 201) {
-        alert("✅ Entrenador registrado correctamente");
-
+        alert("✅ Usuario registrado correctamente");
         setNombre("");
         setCedula("");
         setCorreo("");
         setTelefono("");
-        setEspecialidad("");
-        setExperiencia("");
       } else {
-        alert("⚠️ No se pudo registrar el entrenador");
+        alert("⚠️ No se pudo registrar el usuario");
       }
     } catch (error) {
-      console.error(error);
-      alert("❌ Ocurrió un error al registrar el entrenador");
+      console.error("❌ Error al crear el usuario:", error);
+      alert("❌ Ocurrió un error al registrar el usuario");
     } finally {
       setCargando(false);
     }
@@ -75,21 +65,29 @@ export default function RegistrarEntrenadores() {
 
   return (
     <>
-      <Navbar title="Registro Entrenadores" />
+      <Navbar title="Registro Usuarios" />
 
-      {/* Contenedor principal */}
+      {/* CONTENEDOR CENTRADO */}
       <Box
         sx={{
           minHeight: "calc(100vh - 64px)",
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
+          justifyContent: "center",
           p: 2,
         }}
       >
-        {/* Tarjeta del formulario */}
-        <Paper elevation={3} sx={{ p: 4, width: "100%", maxWidth: 500 }}>
-          <Box component="form" onSubmit={(e) => e.preventDefault()}>
+        <Paper
+          elevation={4}
+          sx={{
+            p: 4,
+            width: "100%",
+            maxWidth: 420,
+          }}
+        >
+          
+
+          <form onSubmit={(e) => e.preventDefault()}>
             <TextField
               label="Nombre"
               fullWidth
@@ -122,32 +120,17 @@ export default function RegistrarEntrenadores() {
               onChange={(e) => setTelefono(e.target.value)}
             />
 
-            <TextField
-              label="Especialidad"
-              fullWidth
-              margin="normal"
-              value={especialidad}
-              onChange={(e) => setEspecialidad(e.target.value)}
-            />
-
-            <TextField
-              label="Experiencia"
-              fullWidth
-              margin="normal"
-              value={experiencia}
-              onChange={(e) => setExperiencia(e.target.value)}
-            />
-
             <Button
               fullWidth
               variant="contained"
-              sx={{ mt: 3 }}
-              onClick={crearEntrenador}
+              color="primary"
+              onClick={crearUsuario}
               disabled={cargando}
+              sx={{ mt: 2 }}
             >
-              {cargando ? "Registrando..." : "Registrar Entrenador"}
+              {cargando ? "Registrando..." : "Registrar Usuario"}
             </Button>
-          </Box>
+          </form>
         </Paper>
       </Box>
     </>

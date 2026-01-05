@@ -4,8 +4,8 @@ import Login from './Pages/Login.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MenuPrincipal from './Pages/MenuPrincipal.jsx';
 
-import VerUsuarios from './Pages/VerUsuarios.jsx';
-import RegistrarUsuarios from './Pages/RegistrarUsuarios.jsx';
+import VerUsuarios from './Pages/Usuarios/VerUsuarios.jsx';
+import RegistrarUsuarios from './Pages/Usuarios/RegistrarUsuarios.jsx';
 
 import HistorialAsistencias from './Pages/HistorialAsistencias.jsx';
 

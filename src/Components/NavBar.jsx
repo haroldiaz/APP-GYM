@@ -95,14 +95,7 @@ export default function Navbar({ title = "APP GYM" }) {
                 <ListItemText primary="Registrar Entrenadores" />
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton onClick={() => handleNav('/Exportar')}>
-                <ListItemIcon><PictureAsPdfIcon /></ListItemIcon>
-                <ListItemText primary="Exportar PDF" />
-              </ListItemButton>
-            </ListItem>
-
-            {/* Puedes seguir agregando más ítems aquí */}
+           
           </List>
         </Box>
       </Drawer>

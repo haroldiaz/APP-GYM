@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import ModalEdicion from "../Components/Usuarios/ModalEdicion";
-import TablaUsuarios from "../Components/Usuarios/TablaUsuarios";
-import Navbar from "../Components/NavBar";
+import ModalEdicion from "../../Components/Usuarios/ModalEdicion";
+import TablaUsuarios from "../../Components/Usuarios/TablaUsuarios";
+import Navbar from "../../Components/NavBar";
 import { Button, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
