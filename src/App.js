@@ -11,6 +11,7 @@ import HistorialAsistencias from './Pages/HistorialAsistencias.jsx';
 
 import VerEntrenadores from './Pages/Entrenadores/VerEntrenadores.jsx';
 import RegistrarEntrenador from './Pages/Entrenadores/RegistrarEntrenador.jsx';
+import Visitantes from './Pages/Usuarios/Visitantes.jsx';
 function App() {
   return (
    <div className="App">
@@ -23,6 +24,7 @@ function App() {
       <Route path="/Historial" element={<HistorialAsistencias />} />
       <Route path="/VerEntrenadores" element={<VerEntrenadores />} />
       <Route path="/RegistrarEntrenador" element={<RegistrarEntrenador />} />
+      <Route path="/Visitantes" element={<Visitantes />} />
     </Routes>
   </Router>
   </div>
