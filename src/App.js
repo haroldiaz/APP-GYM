@@ -11,7 +11,7 @@ import HistorialAsistencias from './Pages/HistorialAsistencias.jsx';
 
 import VerEntrenadores from './Pages/Entrenadores/VerEntrenadores.jsx';
 import RegistrarEntrenador from './Pages/Entrenadores/RegistrarEntrenador.jsx';
-import Visitantes from './Pages/Usuarios/Visitantes.jsx';
+import Visitantes from './Pages/Visitantes.jsx';
 function App() {
   return (
    <div className="App">

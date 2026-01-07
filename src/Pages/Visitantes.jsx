@@ -12,7 +12,7 @@ import {
   Typography,
   Box
 } from "@mui/material";
-import Navbar from "../../Components/NavBar";
+import Navbar from "../Components/NavBar";
 
 export default function Visitantes() {
   const [usuarios, setUsuarios] = useState([]);
